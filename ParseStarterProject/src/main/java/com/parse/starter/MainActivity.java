@@ -9,23 +9,34 @@
 package com.parse.starter;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
+import com.parse.GetDataCallback;
 import com.parse.ParseAnalytics;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.starter.LoginSignup.LogOut;
 import com.parse.starter.LoginSignup.Login;
 import com.parse.starter.Navigation.ContentFragment;
-import com.parse.starter.Navigation.ContentFragment2;
 import com.parse.starter.Navigation.Profile.UserProfile;
+
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -36,19 +47,23 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
-    CircleImageView userDP;
+    public  CircleImageView userDP;
+    ParseUser user;
 
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
-    ParseAnalytics.trackAppOpenedInBackground(getIntent());
+      userDP = (CircleImageView) findViewById(R.id.profile_image);
+      ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
     //Navigation Starts
 
-      userDP = (CircleImageView) findViewById(R.id.profile_image);
+
+      //setting current DP
+      updateNavBarDp(null);
+
       userDP.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
@@ -100,10 +115,6 @@ public class MainActivity extends AppCompatActivity {
 
                   case R.id.starred:
                       Toast.makeText(getApplicationContext(),"Stared Selected",Toast.LENGTH_SHORT).show();
-                      ContentFragment2 fragments = new ContentFragment2();
-                      android.support.v4.app.FragmentTransaction fragmentTransactions = getSupportFragmentManager().beginTransaction();
-                      fragmentTransactions.replace(R.id.frame,fragments);
-                      fragmentTransactions.commit();
                       return true;
 
 
@@ -170,6 +181,42 @@ public class MainActivity extends AppCompatActivity {
 
 
   }
+
+    public void updateNavBarDp(Bitmap bitmap){
+
+        if(bitmap == null) {
+            user = ParseUser.getCurrentUser();
+            final ParseFile[] DPfile = new ParseFile[1];
+            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("profilePic");
+            query.whereEqualTo("username", user.getUsername());
+            query.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> objects, ParseException e) {
+                    if (e == null) {
+                        ParseObject object = objects.get(0);
+                        ParseFile file = (ParseFile) object.get("profile_pic");
+                        if (file != null) {
+                            file.getDataInBackground(new GetDataCallback() {
+                                @Override
+                                public void done(byte[] data, ParseException e) {
+                                    Bitmap img = BitmapFactory.decodeByteArray(data, 0, data.length);
+                                    userDP.setImageBitmap(img);
+                                }
+                            });
+                        } else {
+                            userDP.setImageDrawable(getResources().getDrawable(R.drawable.default_user_dp));
+                        }
+                    } else {
+                        Log.i("parse-userDP", e.toString());
+                    }
+                }
+            });
+            Log.i("parse-dp_file", String.valueOf(DPfile[0]));
+        }
+        else {
+            userDP.setImageBitmap(bitmap);
+        }
+    }
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {

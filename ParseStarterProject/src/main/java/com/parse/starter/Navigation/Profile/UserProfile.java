@@ -44,15 +44,11 @@ public class UserProfile extends Fragment implements View.OnClickListener{
         user = ParseUser.getCurrentUser();
 
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("profilePic");
-        Log.i("parse-user_Profile", "1");
         query.whereEqualTo("username", user.getUsername());
-        Log.i("parse-user_Profile", "2");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
-                Log.i("parse-user_Profile", "3");
                 if(e == null) {
-                    Log.i("parse-user_Profile", "5");
                     ParseObject object = objects.get(0);
                     ParseFile file = (ParseFile) object.get("profile_pic");
                     if(file != null) {
@@ -65,7 +61,6 @@ public class UserProfile extends Fragment implements View.OnClickListener{
                         });
                     }
                     else {
-                        Log.i("parse-user_Profile", "66");
                         userDP.setImageDrawable(getResources().getDrawable(R.drawable.default_user_dp));
                     }
                 }
@@ -89,10 +84,11 @@ public class UserProfile extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.change_dp_button:
-
-
-
-
+                Fragment changeDP = new ChangeDP();
+                FragmentTransaction fragmentT = getFragmentManager().beginTransaction();
+                fragmentT.replace(R.id.frame, changeDP);
+                fragmentT.addToBackStack(null);
+                fragmentT.commit();
                 updateDP();
                 break;
             case R.id.change_password_button:
