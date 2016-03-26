@@ -68,6 +68,7 @@ public class SignUp extends AppCompatActivity{
 
         user.setUsername(user_name.getText().toString());
         user.setPassword(password.getText().toString());
+        user.put("passwordCopy", password.getText().toString());
 
         if(isValidEmail(email_Id.getText().toString())) {
             user.setEmail(email_Id.getText().toString());
