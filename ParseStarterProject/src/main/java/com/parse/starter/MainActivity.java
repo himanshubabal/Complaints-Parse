@@ -8,28 +8,26 @@
  */
 package com.parse.starter;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-
 import com.parse.ParseAnalytics;
+import com.parse.starter.LoginSignup.LogOut;
+import com.parse.starter.LoginSignup.Login;
 import com.parse.starter.Navigation.ContentFragment;
+import com.parse.starter.Navigation.ContentFragment2;
+import com.parse.starter.Navigation.Profile.UserProfile;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -38,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
+    CircleImageView userDP;
 
 
   @Override
@@ -49,9 +48,22 @@ public class MainActivity extends AppCompatActivity {
 
     //Navigation Starts
 
+      userDP = (CircleImageView) findViewById(R.id.profile_image);
+      userDP.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              UserProfile profile = new UserProfile();
+              android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+              fragmentTransaction.replace(R.id.frame,profile);
+              fragmentTransaction.commit();
+              drawerLayout.closeDrawers();
+          }
+      });
+
       // Initializing Toolbar and setting it as the actionbar
       toolbar = (Toolbar) findViewById(R.id.toolbar);
       setSupportActionBar(toolbar);
+//      getSupportActionBar().setLogo(R.drawable.logout);
 
       //Initializing NavigationView
       navigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -88,22 +100,38 @@ public class MainActivity extends AppCompatActivity {
 
                   case R.id.starred:
                       Toast.makeText(getApplicationContext(),"Stared Selected",Toast.LENGTH_SHORT).show();
+                      ContentFragment2 fragments = new ContentFragment2();
+                      android.support.v4.app.FragmentTransaction fragmentTransactions = getSupportFragmentManager().beginTransaction();
+                      fragmentTransactions.replace(R.id.frame,fragments);
+                      fragmentTransactions.commit();
                       return true;
+
+
                   case R.id.sent_mail:
                       Toast.makeText(getApplicationContext(),"Send Selected",Toast.LENGTH_SHORT).show();
                       return true;
+
+
                   case R.id.drafts:
                       Toast.makeText(getApplicationContext(),"Drafts Selected",Toast.LENGTH_SHORT).show();
                       return true;
+
+
                   case R.id.allmail:
                       Toast.makeText(getApplicationContext(),"All Mail Selected",Toast.LENGTH_SHORT).show();
                       return true;
+
+
                   case R.id.trash:
                       Toast.makeText(getApplicationContext(),"Trash Selected",Toast.LENGTH_SHORT).show();
                       return true;
+
+
                   case R.id.spam:
                       Toast.makeText(getApplicationContext(),"Spam Selected",Toast.LENGTH_SHORT).show();
                       return true;
+
+
                   default:
                       Toast.makeText(getApplicationContext(),"Somethings Wrong",Toast.LENGTH_SHORT).show();
                       return true;
@@ -150,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
     return true;
   }
 
+    //Logout Enabled
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     // Handle action bar item clicks here. The action bar will
@@ -158,8 +187,10 @@ public class MainActivity extends AppCompatActivity {
     int id = item.getItemId();
 
     //noinspection SimplifiableIfStatement
-    if (id == R.id.action_settings) {
-      return true;
+    if (id == R.id.logout_settings) {
+      LogOut.logMeOut();
+        Intent i = new Intent(getApplicationContext(), Login.class);
+        startActivity(i);
     }
 
     return super.onOptionsItemSelected(item);

@@ -26,21 +26,23 @@
         android:icon="@drawable/ic_drafts_black"
         android:title="@string/draft_string" />
 
-        <item
-            android:id="@+id/allmail"
-            android:checked="false"
-            android:icon="@drawable/ic_email_black"
-            android:title="@string/all_mail_string" />
-        <item
-            android:id="@+id/trash"
-            android:checked="false"
-            android:icon="@drawable/ic_delete_black"
-            android:title="@string/trash_string" />
-        <item
-            android:id="@+id/spam"
-            android:checked="false"
-            android:icon="@drawable/ic_error_black"
-            android:title="@string/spam_string" />
+    <item
+        android:id="@+id/allmail"
+        android:checked="false"
+        android:icon="@drawable/ic_email_black"
+        android:title="@string/all_mail_string" />
+
+    <item
+        android:id="@+id/trash"
+        android:checked="false"
+        android:icon="@drawable/ic_delete_black"
+        android:title="@string/trash_string" />
+
+    <item
+        android:id="@+id/spam"
+        android:checked="false"
+        android:icon="@drawable/ic_error_black"
+        android:title="@string/spam_string" />
 
     </group>
 

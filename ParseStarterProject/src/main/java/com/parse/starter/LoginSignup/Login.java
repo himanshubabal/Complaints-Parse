@@ -28,7 +28,7 @@ public class Login extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
-        //TODO ->
+        //TODO -> visiblity of status bar/ notification bar to dark
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
