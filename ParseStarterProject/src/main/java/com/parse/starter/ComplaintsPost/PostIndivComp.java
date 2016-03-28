@@ -1,9 +1,8 @@
-package com.parse.starter.Complaints;
+package com.parse.starter.ComplaintsPost;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,16 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.parse.Parse;
-import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
-import com.parse.starter.Navigation.Profile.ChangeDP;
 import com.parse.starter.R;
 
-public class IndivComp extends Fragment implements View.OnClickListener{
+//todo -> take view back to main menu after complaint is posted
+public class PostIndivComp extends Fragment implements View.OnClickListener{
     EditText title_indiv_comp, description_indiv_comp;
     Button indiv_comp_button;
     ParseUser user;
@@ -29,7 +26,7 @@ public class IndivComp extends Fragment implements View.OnClickListener{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.indiv_comp,container,false);
+        View v = inflater.inflate(R.layout.post_indiv_comp,container,false);
 
         title_indiv_comp = (EditText)v.findViewById(R.id.title_indiv_comp_editText);
         description_indiv_comp = (EditText)v.findViewById(R.id.description_indiv_comp_editText);

@@ -6,7 +6,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Individual Complaint Portal"
+        android:text="Hostel Level Complaint Portal"
         android:id="@+id/textView4"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="80dp"
@@ -16,7 +16,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/title_indiv_comp_editText"
+        android:id="@+id/title_hostel_comp_editText"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:hint="Title"/>
@@ -24,7 +24,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/description_indiv_comp_editText"
+        android:id="@+id/description_hostel_comp_editText"
         android:layout_gravity="center_horizontal"
         android:hint="Description"/>
 
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit Complaint"
-        android:id="@+id/indiv_comp_submit_button"
+        android:id="@+id/hostel_comp_submit_button"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"/>
-</LinearLayout><!-- From: file:/Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/src/main/res/layout/indiv_comp.xml -->
+</LinearLayout><!-- From: file:/Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/src/main/res/layout/post_hostel_comp.xml -->

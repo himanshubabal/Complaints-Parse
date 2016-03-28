@@ -1,4 +1,4 @@
-package com.parse.starter.Complaints;
+package com.parse.starter.ComplaintsPost;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.parse.starter.R;
 
 
-public class NewComplaint extends Fragment implements View.OnClickListener, RadioGroup.OnCheckedChangeListener{
+public class PostNewComplaint extends Fragment implements View.OnClickListener, RadioGroup.OnCheckedChangeListener{
     RadioButton indiv_type, hostel_type, insti_type;
     Button select_comp_type;
     RadioGroup select_comp_type_radioGroup;
@@ -25,7 +25,7 @@ public class NewComplaint extends Fragment implements View.OnClickListener, Radi
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.new_complaint,container,false);
+        View v = inflater.inflate(R.layout.post_new_complaint,container,false);
 
         indiv_type = (RadioButton)v.findViewById(R.id.indiv_comp_radio);
         hostel_type = (RadioButton)v.findViewById(R.id.hostel_comp_radio);
@@ -46,34 +46,34 @@ public class NewComplaint extends Fragment implements View.OnClickListener, Radi
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.comp_type_select_button){
-            Log.i("parse-new_complaint", "complaint_type_button");
+            Log.i("parse-post_new_complaint", "complaint_type_button");
             if(compType.equals("indiv_type")){
-                Fragment indiv_comp = new IndivComp();
+                Fragment indiv_comp = new PostIndivComp();
                 FragmentTransaction fragmentT = getFragmentManager().beginTransaction();
                 fragmentT.replace(R.id.frame, indiv_comp);
                 fragmentT.addToBackStack(null);
                 fragmentT.commit();
             }
             else if (compType.equals("hostel_type")){
-                Fragment hostel_comp = new InstiComp();
+                Fragment hostel_comp = new PostHostelComp();
                 FragmentTransaction fragmentT = getFragmentManager().beginTransaction();
                 fragmentT.replace(R.id.frame, hostel_comp);
                 fragmentT.addToBackStack(null);
                 fragmentT.commit();
             }
             else if (compType.equals("insti_type")){
-                Fragment insti_comp = new HostelComp();
+                Fragment insti_comp = new PostInstiComp();
                 FragmentTransaction fragmentT = getFragmentManager().beginTransaction();
                 fragmentT.replace(R.id.frame, insti_comp);
                 fragmentT.addToBackStack(null);
                 fragmentT.commit();
             }
             else {
-                Log.i("parse-new_complaint", "button_other");
+                Log.i("parse-post_new_complaint", "button_other");
             }
         }
         else {
-            Log.i("parse-new_complaint", "button_other");
+            Log.i("parse-post_new_complaint", "button_other");
         }
     }
 
@@ -81,23 +81,23 @@ public class NewComplaint extends Fragment implements View.OnClickListener, Radi
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         if(checkedId == R.id.indiv_comp_radio){
-            Log.i("parse-new_complaint", "indiv_radio");
+            Log.i("parse-post_new_complaint", "indiv_radio");
             compType = "indiv_type";
         }
         else if (checkedId == R.id.hostel_comp_radio){
-            Log.i("parse-new_complaint", "hostel_radio");
+            Log.i("parse-post_new_complaint", "hostel_radio");
             Toast.makeText(getActivity(), "hostel_radio", Toast.LENGTH_SHORT).show();
             compType = "hostel_type";
 
         }
         else if (checkedId == R.id.insti_comp_radio){
-            Log.i("parse-new_complaint", "insti_radio");
+            Log.i("parse-post_new_complaint", "insti_radio");
             Toast.makeText(getActivity(), "insti_radio", Toast.LENGTH_SHORT).show();
             compType = "insti_type";
 
         }
         else {
-            Log.i("parse-new_complaint", "radio_other");
+            Log.i("parse-post_new_complaint", "radio_other");
         }
     }
 }

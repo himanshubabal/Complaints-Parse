@@ -26,19 +26,19 @@ import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.GetDataCallback;
-import com.parse.Parse;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseRole;
 import com.parse.ParseUser;
-import com.parse.starter.Complaints.NewComplaint;
+import com.parse.starter.ComplaintsPost.PostNewComplaint;
 import com.parse.starter.LoginSignup.LogOut;
 import com.parse.starter.LoginSignup.Login;
-import com.parse.starter.Navigation.ContentFragment;
 import com.parse.starter.Navigation.Profile.UserProfile;
+import com.parse.starter.ViewComplaints.ViewHostelComp;
+import com.parse.starter.ViewComplaints.ViewInstiComp;
+import com.parse.starter.ViewComplaints.ViewSelfComp;
 
 import java.util.List;
 
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                   //Replacing the main content with ContentFragment Which is our Inbox View;
                   case R.id.new_comp_menu:
                       Toast.makeText(getApplicationContext(),"Inbox Selected",Toast.LENGTH_SHORT).show();
-                      NewComplaint complaint = new NewComplaint();
+                      PostNewComplaint complaint = new PostNewComplaint();
                       android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                       fragmentTransaction.replace(R.id.frame,complaint);
                       fragmentTransaction.commit();
@@ -134,16 +134,28 @@ public class MainActivity extends AppCompatActivity {
 
                   case R.id.your_comp_menu:
                       Toast.makeText(getApplicationContext(),"Send Selected",Toast.LENGTH_SHORT).show();
+                      ViewSelfComp viewSelfComp = new ViewSelfComp();
+                      android.support.v4.app.FragmentTransaction fragmentTransactio = getSupportFragmentManager().beginTransaction();
+                      fragmentTransactio.replace(R.id.frame,viewSelfComp);
+                      fragmentTransactio.commit();
                       return true;
 
 
                   case R.id.hostel_comp_menu:
                       Toast.makeText(getApplicationContext(),"Drafts Selected",Toast.LENGTH_SHORT).show();
+                      ViewHostelComp viewHostelComp = new ViewHostelComp();
+                      android.support.v4.app.FragmentTransaction fragmentTransacti = getSupportFragmentManager().beginTransaction();
+                      fragmentTransacti.replace(R.id.frame,viewHostelComp);
+                      fragmentTransacti.commit();
                       return true;
 
 
                   case R.id.insti_comp_menu:
                       Toast.makeText(getApplicationContext(),"All Mail Selected",Toast.LENGTH_SHORT).show();
+                      ViewInstiComp viewInstiComp = new ViewInstiComp();
+                      android.support.v4.app.FragmentTransaction fragmentTransact = getSupportFragmentManager().beginTransaction();
+                      fragmentTransact.replace(R.id.frame,viewInstiComp);
+                      fragmentTransact.commit();
                       return true;
 
 
