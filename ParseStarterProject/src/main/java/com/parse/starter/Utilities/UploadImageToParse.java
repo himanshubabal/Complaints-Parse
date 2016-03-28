@@ -42,6 +42,7 @@ public class UploadImageToParse {
 
                         object.put("username", user.getUsername().toString());
                         object.put("profile_pic", file);
+                        object.put("user_ID", ParseUser.getCurrentUser());
                         Log.i("parse-test", "7");
 
                         object.saveInBackground(new SaveCallback() {

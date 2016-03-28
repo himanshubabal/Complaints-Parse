@@ -49,16 +49,20 @@ public class UserProfile extends Fragment implements View.OnClickListener{
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
                 if(e == null) {
-                    ParseObject object = objects.get(0);
-                    ParseFile file = (ParseFile) object.get("profile_pic");
-                    if(file != null) {
-                        file.getDataInBackground(new GetDataCallback() {
-                            @Override
-                            public void done(byte[] data, ParseException e) {
-                                Bitmap img = BitmapFactory.decodeByteArray(data, 0, data.length);
-                                userDP.setImageBitmap(img);
-                            }
-                        });
+                    if(objects.size() != 0) {
+                        ParseObject object = objects.get(0);
+                        ParseFile file = (ParseFile) object.get("profile_pic");
+                        if (file != null) {
+                            file.getDataInBackground(new GetDataCallback() {
+                                @Override
+                                public void done(byte[] data, ParseException e) {
+                                    Bitmap img = BitmapFactory.decodeByteArray(data, 0, data.length);
+                                    userDP.setImageBitmap(img);
+                                }
+                            });
+                        } else {
+                            userDP.setImageDrawable(getResources().getDrawable(R.drawable.default_user_dp));
+                        }
                     }
                     else {
                         userDP.setImageDrawable(getResources().getDrawable(R.drawable.default_user_dp));

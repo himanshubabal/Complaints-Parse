@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,25 +63,31 @@ public class ChangeDP extends Fragment implements View.OnClickListener{
             startActivityForResult(
                     Intent.createChooser(intent, "Select File"), 1);//GALLERY request code is 0.
         }
-        else if(v.getId() == R.id.updateDP_updateDP){//Upload Image Button Clicked
+        else if(v.getId() == R.id.updateDP_updateDP) {//Upload Image Button Clicked
             Log.i("parse-test", "5");
-            int i = UploadImageToParse.uploadToParse(userDP);
-            Log.i("parse-test", i+"value of i");
-
-            if(i != 1){
-                Log.i("parse-test", "11");
-                Toast.makeText(getActivity(), "Picture Updated Successfully", Toast.LENGTH_SHORT).show();
-                Log.i("parse-test", "12");
-                ((MainActivity)getActivity()).updateNavBarDp(userDP);
-
-                Log.i("parse-test", "13");
-            }
-            else {
-
+            if (userDP != null) {
+                int i = UploadImageToParse.uploadToParse(userDP);
+                Log.i("parse-test", i + "value of i");
+                if (i != 1) {
+                    Log.i("parse-test", "11");
+                    Toast.makeText(getActivity(), "Picture Updated Successfully", Toast.LENGTH_SHORT).show();
+                    Log.i("parse-test", "12");
+                    ((MainActivity) getActivity()).updateNavBarDp(userDP);
+                    Fragment userProfile = new UserProfile();
+                    FragmentTransaction fragmentT = getFragmentManager().beginTransaction();
+                    fragmentT.replace(R.id.frame, userProfile);
+                    fragmentT.addToBackStack(null);
+                    fragmentT.commit();
+                    Log.i("parse-test", "13");
+                } else {
+                    Toast.makeText(getActivity(), "Network Error", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(getActivity(), "Choose photo to upload", Toast.LENGTH_SHORT).show();
             }
         }
         else {
-
+            return;
         }
     }
 

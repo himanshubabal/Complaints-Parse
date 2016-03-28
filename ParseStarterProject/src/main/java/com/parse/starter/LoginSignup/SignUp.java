@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -20,11 +21,12 @@ import com.parse.starter.R;
 
 import java.util.List;
 
-public class SignUp extends AppCompatActivity{
+public class SignUp extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener{
     EditText email_Id, entry_No, full_Name, password, hostel, user_name;
     RadioButton student, faculty, staff;
     Button signUpButton;
     int userType;
+    RadioGroup radioGroup;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,21 +41,10 @@ public class SignUp extends AppCompatActivity{
         user_name = (EditText) findViewById(R.id.userName_editText_signup);
         password = (EditText) findViewById(R.id.password_editText_signup);
         hostel = (EditText) findViewById(R.id.hostel_editText);
-
-        //radio button not working
+        radioGroup = (RadioGroup) findViewById(R.id.radio_group_signup);
         student = (RadioButton) findViewById(R.id.student_radioButton);
-        if(student.isChecked()){
-            userType = 0;
-        }
         faculty = (RadioButton) findViewById(R.id.faculty_radioButton);
-        if(faculty.isChecked()){
-            userType = 1;
-        }
         staff = (RadioButton) findViewById(R.id.staff_radioButton);
-        if(staff.isChecked()){
-            userType = 2;
-        }
-
         signUpButton = (Button) findViewById(R.id.signUp_button);
 
     }
@@ -124,5 +115,25 @@ public class SignUp extends AppCompatActivity{
             }
         });
         return available[0];
+    }
+
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        if (checkedId == R.id.student_radioButton){
+            userType = 0;
+            Log.i("parse-signup", String.valueOf(userType));
+        }
+        else if (checkedId == R.id.faculty_radioButton){
+            userType = 1;
+            Log.i("parse-signup", String.valueOf(userType));
+        }
+        else if (checkedId == R.id.staff_radioButton){
+            userType = 2;
+            Log.i("parse-signup", String.valueOf(userType));
+        }
+        else {
+            //
+        }
     }
 }

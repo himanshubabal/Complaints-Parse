@@ -21,16 +21,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.GetDataCallback;
+import com.parse.Parse;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseRole;
 import com.parse.ParseUser;
+import com.parse.starter.Complaints.NewComplaint;
 import com.parse.starter.LoginSignup.LogOut;
 import com.parse.starter.LoginSignup.Login;
 import com.parse.starter.Navigation.ContentFragment;
@@ -49,20 +53,25 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     public  CircleImageView userDP;
     ParseUser user;
+    public TextView name_header, entryNo_header;
 
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+      user = ParseUser.getCurrentUser();
       userDP = (CircleImageView) findViewById(R.id.profile_image);
       ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
     //Navigation Starts
-
-
+      name_header = (TextView) findViewById(R.id.username_header);
+      entryNo_header = (TextView) findViewById(R.id.email_header);
+      name_header.setText(user.get("name").toString());
+      entryNo_header.setText(user.getEmail());
       //setting current DP
       updateNavBarDp(null);
+
 
       userDP.setOnClickListener(new View.OnClickListener() {
           @Override
@@ -103,43 +112,52 @@ public class MainActivity extends AppCompatActivity {
 
 
                   //Replacing the main content with ContentFragment Which is our Inbox View;
-                  case R.id.inbox:
+                  case R.id.new_comp_menu:
                       Toast.makeText(getApplicationContext(),"Inbox Selected",Toast.LENGTH_SHORT).show();
-                      ContentFragment fragment = new ContentFragment();
+                      NewComplaint complaint = new NewComplaint();
                       android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                      fragmentTransaction.replace(R.id.frame,fragment);
+                      fragmentTransaction.replace(R.id.frame,complaint);
                       fragmentTransaction.commit();
                       return true;
 
                   // For rest of the options we just show a toast on click
 
-                  case R.id.starred:
-                      Toast.makeText(getApplicationContext(),"Stared Selected",Toast.LENGTH_SHORT).show();
+                  //Menu View Profile Done
+                  case R.id.view_profile_menu:
+                      Toast.makeText(getApplicationContext(),"View your Profile",Toast.LENGTH_SHORT).show();
+                      UserProfile profile = new UserProfile();
+                      android.support.v4.app.FragmentTransaction fragmentTransactions = getSupportFragmentManager().beginTransaction();
+                      fragmentTransactions.replace(R.id.frame,profile);
+                      fragmentTransactions.commit();
                       return true;
 
 
-                  case R.id.sent_mail:
+                  case R.id.your_comp_menu:
                       Toast.makeText(getApplicationContext(),"Send Selected",Toast.LENGTH_SHORT).show();
                       return true;
 
 
-                  case R.id.drafts:
+                  case R.id.hostel_comp_menu:
                       Toast.makeText(getApplicationContext(),"Drafts Selected",Toast.LENGTH_SHORT).show();
                       return true;
 
 
-                  case R.id.allmail:
+                  case R.id.insti_comp_menu:
                       Toast.makeText(getApplicationContext(),"All Mail Selected",Toast.LENGTH_SHORT).show();
                       return true;
 
 
-                  case R.id.trash:
+                  case R.id.settings_menu:
                       Toast.makeText(getApplicationContext(),"Trash Selected",Toast.LENGTH_SHORT).show();
                       return true;
 
 
-                  case R.id.spam:
-                      Toast.makeText(getApplicationContext(),"Spam Selected",Toast.LENGTH_SHORT).show();
+                  //Menu Logout Done
+                  case R.id.logout_menu:
+                      Toast.makeText(getApplicationContext(),"Logging you Out..!!",Toast.LENGTH_SHORT).show();
+                      LogOut.logMeOut();
+                      Intent i = new Intent(getApplicationContext(), Login.class);
+                      startActivity(i);
                       return true;
 
 
@@ -182,10 +200,9 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
-    public void updateNavBarDp(Bitmap bitmap){
+  public void updateNavBarDp(Bitmap bitmap){
 
         if(bitmap == null) {
-            user = ParseUser.getCurrentUser();
             final ParseFile[] DPfile = new ParseFile[1];
             ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("profilePic");
             query.whereEqualTo("username", user.getUsername());
@@ -193,17 +210,22 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void done(List<ParseObject> objects, ParseException e) {
                     if (e == null) {
-                        ParseObject object = objects.get(0);
-                        ParseFile file = (ParseFile) object.get("profile_pic");
-                        if (file != null) {
-                            file.getDataInBackground(new GetDataCallback() {
-                                @Override
-                                public void done(byte[] data, ParseException e) {
-                                    Bitmap img = BitmapFactory.decodeByteArray(data, 0, data.length);
-                                    userDP.setImageBitmap(img);
-                                }
-                            });
-                        } else {
+                        if(objects.size() != 0) {
+                            ParseObject object = objects.get(0);
+                            ParseFile file = (ParseFile) object.get("profile_pic");
+                            if (file != null) {
+                                file.getDataInBackground(new GetDataCallback() {
+                                    @Override
+                                    public void done(byte[] data, ParseException e) {
+                                        Bitmap img = BitmapFactory.decodeByteArray(data, 0, data.length);
+                                        userDP.setImageBitmap(img);
+                                    }
+                                });
+                            } else {
+                                userDP.setImageDrawable(getResources().getDrawable(R.drawable.default_user_dp));
+                            }
+                        }
+                        else {
                             userDP.setImageDrawable(getResources().getDrawable(R.drawable.default_user_dp));
                         }
                     } else {
