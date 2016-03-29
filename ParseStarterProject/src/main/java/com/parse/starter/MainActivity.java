@@ -26,11 +26,13 @@ import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.GetDataCallback;
+import com.parse.ParseACL;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseRole;
 import com.parse.ParseUser;
 import com.parse.starter.PostComplaints.PostNewComplaint;
 import com.parse.starter.LoginSignup.LogOut;
@@ -72,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
       //setting current DP
       updateNavBarDp(null);
 
+
+      //*************
+      updateRole();
+      //*************
 
       userDP.setOnClickListener(new View.OnClickListener() {
           @Override
@@ -211,6 +217,59 @@ public class MainActivity extends AppCompatActivity {
 
 
   }
+
+
+    public void updateRole(){
+//        ParseACL roleACL = new ParseACL();
+//        roleACL.setPublicReadAccess(true);
+//        ParseRole role = new ParseRole("student_normal", roleACL);
+//        role.saveInBackground();
+//
+////        ParseRole role = new ParseRole(roleName, roleACL);
+//        for (ParseUser user : usersToAddToRole) {
+//            role.getUsers().add(user)
+//        }
+////        for (ParseRole childRole : rolesToAddToRole) {
+////            role.getRoles().add(childRole);
+////        }
+//        role.saveInBackground();
+
+
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("userType", 0);
+        query.findInBackground(new FindCallback<ParseUser>() {
+            @Override
+            public void done(List<ParseUser> objects, ParseException e) {
+                if(e == null){
+                    if(objects.size() != 0){
+//                        for(ParseUser userQuery : objects){
+                            ParseACL roleACL = new ParseACL();
+                            roleACL.setPublicReadAccess(true);
+                            ParseRole role = new ParseRole("student_normal", roleACL);
+                            role.saveInBackground();
+
+//        ParseRole role = new ParseRole(roleName, roleACL);
+                            for (ParseUser user : objects) {
+                                role.getUsers().add(user);
+//                            }
+//        for (ParseRole childRole : rolesToAddToRole) {
+//            role.getRoles().add(childRole);
+//        }
+                            role.saveInBackground();
+                        }
+                    }
+                    else {
+
+                    }
+                }
+                else {
+                    Log.i("parse----", e.toString());
+                }
+            }
+        });
+
+    }
+
 
   public void updateNavBarDp(Bitmap bitmap){
 
