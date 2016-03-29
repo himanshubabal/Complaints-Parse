@@ -45,6 +45,7 @@
         </activity>
         <activity android:name="com.parse.starter.MainActivity" />
         <activity android:name="com.parse.starter.LoginSignup.SignUp" />
+        <activity android:name="com.parse.starter.LoginSignup.ResetPassword" />
     </application>
 
 </manifest>

@@ -23,6 +23,7 @@
     <string name="openDrawer">Navigation View Closed</string>
     
     <string-array name="hostel_spinner_array">
+        <item>Choose Your Hostel</item>
         <item>Karakoram</item>
         <item>Aravali</item>
         <item>Girnar</item>

@@ -13,19 +13,46 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Username"
-        android:id="@+id/userName_EditText"/>
+        android:id="@+id/userName_EditText"
+        android:paddingTop="100dp"
+        android:layout_margin="20dp"
+        android:singleLine="true"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
-        android:id="@+id/password_editText"/>
+        android:id="@+id/password_editText"
+        android:inputType="textPassword"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:singleLine="true"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log In"
         android:id="@+id/logIn_button"
-        android:onClick="logInMethod"/>
+        android:onClick="logInMethod"
+        android:layout_gravity="center_horizontal"
+        style="@style/Base.Widget.AppCompat.ActionButton"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:id="@+id/signUp_loginActivity_button"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center_horizontal"
+        style="@style/Base.Widget.AppCompat.ActionButton"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot Password .."
+        android:id="@+id/forgotPassword_login_button"
+        android:layout_gravity="center_horizontal"
+        style="@style/Base.Widget.AppCompat.ActionButton"/>
 
 </LinearLayout><!-- From: file:/Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/src/main/res/layout/login_activity.xml -->

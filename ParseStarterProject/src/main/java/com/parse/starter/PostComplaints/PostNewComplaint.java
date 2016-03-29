@@ -81,12 +81,10 @@ public class PostNewComplaint extends Fragment implements View.OnClickListener, 
             compType = "indiv_type";
         }
         else if (checkedId == R.id.hostel_comp_radio){
-            Toast.makeText(getActivity(), "hostel_radio", Toast.LENGTH_SHORT).show();
             compType = "hostel_type";
 
         }
         else if (checkedId == R.id.insti_comp_radio){
-            Toast.makeText(getActivity(), "insti_radio", Toast.LENGTH_SHORT).show();
             compType = "insti_type";
 
         }

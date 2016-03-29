@@ -16,19 +16,23 @@
         android:layout_height="wrap_content"
         android:text="Take picture from camera"
         android:id="@+id/imgFromCamera_button_updateDP"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        style="@style/Base.Widget.AppCompat.ActionButton"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Take picture from gallery"
         android:id="@+id/imgFromGallary_button_updateDP"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        style="@style/Base.Widget.AppCompat.ActionButton"/>
 
     <Button
         android:layout_width="219dp"
         android:layout_height="wrap_content"
         android:text="update profile picture"
         android:id="@+id/updateDP_updateDP"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        style="@style/Base.Widget.AppCompat.ActionButton"/>
+
 </LinearLayout><!-- From: file:/Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/src/main/res/layout/change_dp.xml -->

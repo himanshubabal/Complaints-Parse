@@ -20,7 +20,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="46dp"
-        android:onClick="changePasswordMethod"/>
+        android:onClick="changePasswordMethod"
+        style="@style/Base.Widget.AppCompat.ActionButton"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -29,5 +30,6 @@
         android:id="@+id/change_dp_button"
         android:layout_below="@+id/user_profile_pic"
         android:layout_centerHorizontal="true"
-        android:onClick="changeDPMethod"/>
+        android:onClick="changeDPMethod"
+        style="@style/Base.Widget.AppCompat.ActionButton"/>
 </RelativeLayout>

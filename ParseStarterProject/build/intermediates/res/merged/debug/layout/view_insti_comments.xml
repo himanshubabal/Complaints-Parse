@@ -140,16 +140,16 @@
             android:layout_alignStart="@+id/title_comments_insti_textView" />
 
         <Button
-            style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Up-Vote"
             android:id="@+id/upVote_comment_insti_button"
             android:layout_below="@+id/textView18"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            style="@style/Base.Widget.AppCompat.ActionButton"/>
 
         <Button
-            style="?android:attr/buttonStyleSmall"
+            style="@style/Base.Widget.AppCompat.ActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Down-Vote"
@@ -165,7 +165,7 @@
             android:layout_alignParentStart="true" />
 
         <Button
-            style="?android:attr/buttonStyleSmall"
+            style="@style/Base.Widget.AppCompat.ActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add Comment"

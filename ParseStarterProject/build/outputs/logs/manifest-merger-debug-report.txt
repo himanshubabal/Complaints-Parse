@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/src/main/AndroidManifest.xml:10:1-44:12
+ADDED from /Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/src/main/AndroidManifest.xml:10:1-45:12
 	xmlns:android
 		ADDED from /Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/src/main/AndroidManifest.xml:10:11-69
 	package
@@ -30,7 +30,7 @@ ADDED from /Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStar
 	android:name
 		ADDED from /Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/src/main/AndroidManifest.xml:16:22-62
 application
-ADDED from /Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/src/main/AndroidManifest.xml:18:5-42:19
+ADDED from /Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/src/main/AndroidManifest.xml:18:5-43:19
 MERGED from [com.android.support:design:22.2.0] /Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/build/intermediates/exploded-aar/com.android.support/design/22.2.0/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:appcompat-v7:22.2.0] /Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:22.2.0] /Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/AndroidManifest.xml:22:5-20
@@ -84,6 +84,10 @@ activity#com.parse.starter.LoginSignup.SignUp
 ADDED from /Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/src/main/AndroidManifest.xml:41:9-65
 	android:name
 		ADDED from /Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/src/main/AndroidManifest.xml:41:19-53
+activity#com.parse.starter.LoginSignup.ResetPassword
+ADDED from /Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/src/main/AndroidManifest.xml:42:9-72
+	android:name
+		ADDED from /Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/src/main/AndroidManifest.xml:42:19-60
 uses-sdk
 INJECTED from /Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/src/main/AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:design:22.2.0] /Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/build/intermediates/exploded-aar/com.android.support/design/22.2.0/AndroidManifest.xml:20:5-43

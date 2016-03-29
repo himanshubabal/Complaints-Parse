@@ -73,11 +73,13 @@ public class ChangeDP extends Fragment implements View.OnClickListener{
                     Toast.makeText(getActivity(), "Picture Updated Successfully", Toast.LENGTH_SHORT).show();
                     Log.i("parse-test", "12");
                     ((MainActivity) getActivity()).updateNavBarDp(userDP);
-                    Fragment userProfile = new UserProfile();
-                    FragmentTransaction fragmentT = getFragmentManager().beginTransaction();
-                    fragmentT.replace(R.id.frame, userProfile);
-                    fragmentT.addToBackStack(null);
-                    fragmentT.commit();
+//                    Fragment userProfile = new UserProfile();
+//                    FragmentTransaction fragmentT = getFragmentManager().beginTransaction();
+//                    fragmentT.replace(R.id.frame, userProfile);
+//                    fragmentT.addToBackStack(null);
+//                    fragmentT.commit();
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
                     Log.i("parse-test", "13");
                 } else {
                     Toast.makeText(getActivity(), "Network Error", Toast.LENGTH_SHORT).show();

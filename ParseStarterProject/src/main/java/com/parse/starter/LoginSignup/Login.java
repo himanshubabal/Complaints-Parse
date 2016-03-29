@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.LogInCallback;
@@ -26,7 +27,7 @@ import java.util.List;
 public class Login extends AppCompatActivity{
     EditText userName;
     EditText password;
-    Button logIn;
+    Button logIn, signup_logIn, forgotPassword;
     private Toolbar toolbar;
 
     @Override
@@ -41,6 +42,23 @@ public class Login extends AppCompatActivity{
         userName = (EditText) findViewById(R.id.userName_EditText);
         password = (EditText) findViewById(R.id.password_editText);
         logIn = (Button) findViewById(R.id.logIn_button);
+        signup_logIn = (Button) findViewById(R.id.signUp_loginActivity_button);
+        signup_logIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Login.this, SignUp.class);
+                startActivity(i);
+            }
+        });
+
+        forgotPassword = (Button) findViewById(R.id.forgotPassword_login_button);
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Login.this, ResetPassword.class);
+                startActivity(i);
+            }
+        });
 
     }
 
@@ -57,7 +75,7 @@ public class Login extends AppCompatActivity{
                     startActivity(i);
                 }
                 else {
-                    Log.i("parse-LogIn", e.toString());
+                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

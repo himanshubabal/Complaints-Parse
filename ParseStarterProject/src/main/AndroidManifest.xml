@@ -39,6 +39,7 @@
         </activity>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".LoginSignup.SignUp"></activity>
+        <activity android:name=".LoginSignup.ResetPassword"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.parse.starter.Navigation.Profile;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -96,12 +97,8 @@ public class UserProfile extends Fragment implements View.OnClickListener{
                 updateDP();
                 break;
             case R.id.change_password_button:
-                Fragment changePWD = new ResetPassword();
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.frame, changePWD);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-                break;
+                Intent intent = new Intent(getActivity(), ResetPassword.class);
+                startActivity(intent);
         }
     }
 }

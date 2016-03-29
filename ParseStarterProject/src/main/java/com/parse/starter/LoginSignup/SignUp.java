@@ -93,7 +93,7 @@ public class SignUp extends AppCompatActivity implements RadioGroup.OnCheckedCha
                     Log.i("parse-signUp", "SignUp Successful");
                 }
                 else {//error in signing up
-                    Log.i("parse-signUp", e.toString());
+                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -154,45 +154,47 @@ public class SignUp extends AppCompatActivity implements RadioGroup.OnCheckedCha
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
             case 0:
-                hostel = "karakoram";
                 break;
             case 1:
-                hostel = "aravali";
+                hostel = "karakoram";
                 break;
             case 2:
-                hostel = "girnar";
+                hostel = "aravali";
                 break;
             case 3:
-                hostel = "jwalamukhi";
+                hostel = "girnar";
                 break;
             case 4:
-                hostel = "kumaon";
+                hostel = "jwalamukhi";
                 break;
             case 5:
-                hostel = "nilgiri";
+                hostel = "kumaon";
                 break;
             case 6:
-                hostel = "shivalik";
+                hostel = "nilgiri";
                 break;
             case 7:
-                hostel = "satpura";
+                hostel = "shivalik";
                 break;
             case 8:
-                hostel = "udaigiri";
+                hostel = "satpura";
                 break;
             case 9:
-                hostel = "vindhyachal";
+                hostel = "udaigiri";
                 break;
             case 10:
-                hostel = "zanskar";
+                hostel = "vindhyachal";
                 break;
             case 11:
-                hostel = "kailash";
+                hostel = "zanskar";
                 break;
             case 12:
-                hostel = "Himadri";
+                hostel = "kailash";
                 break;
             case 13:
+                hostel = "Himadri";
+                break;
+            case 14:
                 hostel = "not_applicable";
                 break;
         }

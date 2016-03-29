@@ -55,6 +55,7 @@
         android:text="Proceed"
         android:id="@+id/comp_type_select_button"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        style="@style/Base.Widget.AppCompat.ActionButton"/>
 
 </LinearLayout><!-- From: file:/Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/src/main/res/layout/post_new_complaint.xml -->

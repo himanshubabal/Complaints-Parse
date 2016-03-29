@@ -1,5 +1,6 @@
 package com.parse.starter.ResolveComplaint;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.parse.starter.Comments.ViewHostelComments;
+import com.parse.starter.MainActivity;
 import com.parse.starter.R;
 
 import java.util.ArrayList;
@@ -65,6 +67,8 @@ public class ResolveHostelComplaint extends Fragment implements View.OnClickList
                                 public void done(ParseException e) {
                                     if (e == null) {
                                         Toast.makeText(getActivity(), "Complaint marked as Resolved", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                                        startActivity(intent);
 
                                     } else {
                                         Log.i("parse-####", e.toString());

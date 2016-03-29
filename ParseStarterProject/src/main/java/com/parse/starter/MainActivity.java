@@ -118,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
 
                   //Replacing the main content with ContentFragment Which is our Inbox View;
                   case R.id.new_comp_menu:
-                      Toast.makeText(getApplicationContext(),"Inbox Selected",Toast.LENGTH_SHORT).show();
                       PostNewComplaint complaint = new PostNewComplaint();
                       android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                       fragmentTransaction.replace(R.id.frame,complaint);
@@ -129,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
 
                   //Menu View Profile Done
                   case R.id.view_profile_menu:
-                      Toast.makeText(getApplicationContext(),"View your Profile",Toast.LENGTH_SHORT).show();
                       UserProfile profile = new UserProfile();
                       android.support.v4.app.FragmentTransaction fragmentTransactions = getSupportFragmentManager().beginTransaction();
                       fragmentTransactions.replace(R.id.frame,profile);
@@ -138,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
 
 
                   case R.id.your_comp_menu:
-                      Toast.makeText(getApplicationContext(),"Send Selected",Toast.LENGTH_SHORT).show();
                       ViewSelfComp viewSelfComp = new ViewSelfComp();
                       android.support.v4.app.FragmentTransaction fragmentTransactio = getSupportFragmentManager().beginTransaction();
                       fragmentTransactio.replace(R.id.frame,viewSelfComp);
@@ -147,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
 
 
                   case R.id.hostel_comp_menu:
-                      Toast.makeText(getApplicationContext(),"Drafts Selected",Toast.LENGTH_SHORT).show();
                       ViewHostelComp viewHostelComp = new ViewHostelComp();
                       android.support.v4.app.FragmentTransaction fragmentTransacti = getSupportFragmentManager().beginTransaction();
                       fragmentTransacti.replace(R.id.frame,viewHostelComp);
@@ -156,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
 
 
                   case R.id.insti_comp_menu:
-                      Toast.makeText(getApplicationContext(),"All Mail Selected",Toast.LENGTH_SHORT).show();
                       ViewInstiComp viewInstiComp = new ViewInstiComp();
                       android.support.v4.app.FragmentTransaction fragmentTransact = getSupportFragmentManager().beginTransaction();
                       fragmentTransact.replace(R.id.frame,viewInstiComp);
@@ -164,8 +159,8 @@ public class MainActivity extends AppCompatActivity {
                       return true;
 
 
+                    //todo ->settings button in slider
                   case R.id.settings_menu:
-                      Toast.makeText(getApplicationContext(),"Trash Selected",Toast.LENGTH_SHORT).show();
                       return true;
 
 

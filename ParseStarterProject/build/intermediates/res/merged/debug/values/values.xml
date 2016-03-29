@@ -3,6 +3,7 @@
     <!-- From: file:/Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string-array name="hostel_spinner_array">
+        <item>Choose Your Hostel</item>
         <item>Karakoram</item>
         <item>Aravali</item>
         <item>Girnar</item>

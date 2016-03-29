@@ -1,5 +1,6 @@
 package com.parse.starter.PostComplaints;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.parse.starter.MainActivity;
 import com.parse.starter.R;
 
 public class PostInstiComp extends Fragment implements View.OnClickListener{
@@ -67,6 +69,8 @@ public class PostInstiComp extends Fragment implements View.OnClickListener{
             public void done(ParseException e) {
                 if (e == null){
                     Toast.makeText(getActivity(), "Complaint Posted Successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
                 }
                 else {
                     Log.i("parse-indivComp_submit", e.toString());

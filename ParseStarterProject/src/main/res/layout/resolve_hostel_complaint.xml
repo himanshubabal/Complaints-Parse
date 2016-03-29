@@ -9,5 +9,6 @@
         android:layout_height="wrap_content"
         android:text="Mark complaint as resolved"
         android:id="@+id/mark_resolved_hostelComp_button"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        style="@style/Base.Widget.AppCompat.ActionButton"/>
 </LinearLayout>
