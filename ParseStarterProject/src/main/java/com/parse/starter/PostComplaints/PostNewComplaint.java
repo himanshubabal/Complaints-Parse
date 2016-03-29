@@ -1,4 +1,4 @@
-package com.parse.starter.ComplaintsPost;
+package com.parse.starter.PostComplaints;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

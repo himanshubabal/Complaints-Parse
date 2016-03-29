@@ -19,8 +19,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.starter.R;
-import com.parse.starter.comments.ViewHostelComments;
-import com.parse.starter.comments.ViewInstiComments;
+import com.parse.starter.Comments.ViewInstiComments;
 
 import java.util.ArrayList;
 import java.util.List;

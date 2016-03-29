@@ -1,4 +1,4 @@
-package com.parse.starter.comments;
+package com.parse.starter.Comments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

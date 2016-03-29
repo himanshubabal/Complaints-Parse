@@ -1,4 +1,4 @@
-package com.parse.starter.comments;
+package com.parse.starter.Comments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,7 +14,6 @@ import android.widget.EditText;
 import com.parse.FindCallback;
 import com.parse.ParseACL;
 import com.parse.ParseException;
-import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;

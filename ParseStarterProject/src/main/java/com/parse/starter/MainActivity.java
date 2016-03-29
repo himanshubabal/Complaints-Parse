@@ -32,7 +32,7 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.starter.ComplaintsPost.PostNewComplaint;
+import com.parse.starter.PostComplaints.PostNewComplaint;
 import com.parse.starter.LoginSignup.LogOut;
 import com.parse.starter.LoginSignup.Login;
 import com.parse.starter.Navigation.Profile.UserProfile;
