@@ -46,7 +46,6 @@ public class PostNewComplaint extends Fragment implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.comp_type_select_button){
-            Log.i("parse-post_new_complaint", "complaint_type_button");
             if(compType.equals("indiv_type")){
                 Fragment indiv_comp = new PostIndivComp();
                 FragmentTransaction fragmentT = getFragmentManager().beginTransaction();
@@ -69,11 +68,9 @@ public class PostNewComplaint extends Fragment implements View.OnClickListener, 
                 fragmentT.commit();
             }
             else {
-                Log.i("parse-post_new_complaint", "button_other");
             }
         }
         else {
-            Log.i("parse-post_new_complaint", "button_other");
         }
     }
 
@@ -81,23 +78,20 @@ public class PostNewComplaint extends Fragment implements View.OnClickListener, 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         if(checkedId == R.id.indiv_comp_radio){
-            Log.i("parse-post_new_complaint", "indiv_radio");
             compType = "indiv_type";
         }
         else if (checkedId == R.id.hostel_comp_radio){
-            Log.i("parse-post_new_complaint", "hostel_radio");
             Toast.makeText(getActivity(), "hostel_radio", Toast.LENGTH_SHORT).show();
             compType = "hostel_type";
 
         }
         else if (checkedId == R.id.insti_comp_radio){
-            Log.i("parse-post_new_complaint", "insti_radio");
             Toast.makeText(getActivity(), "insti_radio", Toast.LENGTH_SHORT).show();
             compType = "insti_type";
 
         }
         else {
-            Log.i("parse-post_new_complaint", "radio_other");
+            Log.i("parse-post_new_comp", "radio_other");
         }
     }
 }

@@ -3,6 +3,7 @@ package com.parse.starter.ViewComplaints;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,16 +18,19 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.starter.ComplaintsPost.PostIndivComp;
 import com.parse.starter.R;
+import com.parse.starter.comments.ViewHostelComments;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewHostelComp extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener{
+public class ViewHostelComp extends Fragment implements View.OnClickListener, ListView.OnItemClickListener{
     ListView hostel_comp_listView;
     ParseUser user;
     ArrayList<String> hostel_comp_array;
     ArrayAdapter<String> hostel_comp_arrayAdapter;
+    ArrayList<ParseObject> parseObjectArrayList;
 
     @Nullable
     @Override
@@ -34,7 +38,8 @@ public class ViewHostelComp extends Fragment implements View.OnClickListener, Ad
         View v = inflater.inflate(R.layout.view_hostel_comp,container,false);
         user = ParseUser.getCurrentUser();
         hostel_comp_listView = (ListView)v.findViewById(R.id.hostel_comp_listView);
-        hostel_comp_array = new ArrayList<String>();
+        hostel_comp_array = new ArrayList<>();
+        parseObjectArrayList = new ArrayList<>();
 
         generateCompList();
 
@@ -50,13 +55,9 @@ public class ViewHostelComp extends Fragment implements View.OnClickListener, Ad
             public void done(List<ParseObject> objects, ParseException e) {
                 if(e == null){
                     if(objects.size() != 0) {
-                        Log.i("parse-self_comp_zzz", String.valueOf((objects.size())));
-                        int i = 0;
                         for (ParseObject object : objects) {
-                            Log.i("parse-self_comp_zzz", String.valueOf(object.get("title")) + String.valueOf(object.get("description")));
                             String title = object.get("title").toString();
                             String description = object.get("description").toString();
-                            Log.i("parse-self_comp_zzz", title + description);
                             Boolean isResolved = object.getBoolean("isResolved");
                             int numOfUp = object.getInt("numOfUp");
                             int numOfDown = object.getInt("numOfDown");
@@ -69,16 +70,17 @@ public class ViewHostelComp extends Fragment implements View.OnClickListener, Ad
                             }
 
                             hostel_comp_array.add("Title : " + title + "\n" + "Description : " + description + "\n" +
+                                    "Posted By : " + object.get("username") + "\n" +
                                     "Status : " + status + "\n" + "Up-Votes : " + numOfUp + "\n" + "Down-Votes : " + numOfDown);
+                            parseObjectArrayList.add(object);
 
                         }
-                        Log.i("parse-self_comp_zzz", "out of for loop");
 
                         hostel_comp_arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, hostel_comp_array);
-                        Log.i("parse-self_comp_zzz", "test-1");
 
                         hostel_comp_listView.setAdapter(hostel_comp_arrayAdapter);
-                        Log.i("parse-self_comp_zzz", "test-2");
+
+                        hostel_comp_listView.setOnItemClickListener(ViewHostelComp.this);
 
                     }
                     else {
@@ -99,6 +101,15 @@ public class ViewHostelComp extends Fragment implements View.OnClickListener, Ad
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        ViewHostelComments viewHostelComments = new ViewHostelComments();
+        Bundle parseObjectID = new Bundle();
+        parseObjectID.putString("parseObjectID", parseObjectArrayList.get(position).getObjectId());
+        viewHostelComments.setArguments(parseObjectID);
 
+//        Fragment viewHostelComments1 = new ViewHostelComments();
+        FragmentTransaction fragmentT = getFragmentManager().beginTransaction();
+        fragmentT.replace(R.id.frame, viewHostelComments);
+        fragmentT.addToBackStack(null);
+        fragmentT.commit();
     }
 }

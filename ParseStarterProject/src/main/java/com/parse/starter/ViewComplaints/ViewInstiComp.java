@@ -3,6 +3,7 @@ package com.parse.starter.ViewComplaints;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,15 +19,19 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.starter.R;
+import com.parse.starter.comments.ViewHostelComments;
+import com.parse.starter.comments.ViewInstiComments;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewInstiComp extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener{
+public class ViewInstiComp extends Fragment implements View.OnClickListener, ListView.OnItemClickListener{
     ListView insti_comp_listView;
     ParseUser user;
     ArrayList<String> insti_comp_array;
     ArrayAdapter<String> insti_comp_arrayAdapter;
+    ArrayList<ParseObject> parseObjectArrayList;
+
 
     @Nullable
     @Override
@@ -35,6 +40,8 @@ public class ViewInstiComp extends Fragment implements View.OnClickListener, Ada
         user = ParseUser.getCurrentUser();
         insti_comp_listView = (ListView)v.findViewById(R.id.insti_comp_listView);
         insti_comp_array = new ArrayList<String>();
+        parseObjectArrayList = new ArrayList<>();
+
 
         generateCompList();
 
@@ -69,7 +76,9 @@ public class ViewInstiComp extends Fragment implements View.OnClickListener, Ada
                             }
 
                             insti_comp_array.add("Title : " + title + "\n" + "Description : " + description + "\n" +
+                                    "Posted By : " + object.get("username") + "\n" +
                                     "Status : " + status + "\n" + "Up-Votes : " + numOfUp + "\n" + "Down-Votes : " + numOfDown);
+                            parseObjectArrayList.add(object);
 
                         }
                         Log.i("parse-self_comp_zzz", "out of for loop");
@@ -79,6 +88,8 @@ public class ViewInstiComp extends Fragment implements View.OnClickListener, Ada
 
                         insti_comp_listView.setAdapter(insti_comp_arrayAdapter);
                         Log.i("parse-self_comp_zzz", "test-2");
+                        insti_comp_listView.setOnItemClickListener(ViewInstiComp.this);
+
 
                     }
                     else {
@@ -99,6 +110,15 @@ public class ViewInstiComp extends Fragment implements View.OnClickListener, Ada
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        ViewInstiComments viewInstiComments = new ViewInstiComments();
+        Bundle parseObjectID = new Bundle();
+        parseObjectID.putString("parseObjectID", parseObjectArrayList.get(position).getObjectId());
+        viewInstiComments.setArguments(parseObjectID);
 
+//        Fragment viewHostelComments1 = new ViewHostelComments();
+        FragmentTransaction fragmentT = getFragmentManager().beginTransaction();
+        fragmentT.replace(R.id.frame, viewInstiComments);
+        fragmentT.addToBackStack(null);
+        fragmentT.commit();
     }
 }
