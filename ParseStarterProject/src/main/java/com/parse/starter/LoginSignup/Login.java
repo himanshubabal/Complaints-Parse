@@ -11,11 +11,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.parse.FindCallback;
 import com.parse.LogInCallback;
+import com.parse.ParseACL;
 import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseRole;
 import com.parse.ParseUser;
 import com.parse.starter.MainActivity;
 import com.parse.starter.R;
+
+import java.util.List;
 
 public class Login extends AppCompatActivity{
     EditText userName;
@@ -35,7 +41,9 @@ public class Login extends AppCompatActivity{
         userName = (EditText) findViewById(R.id.userName_EditText);
         password = (EditText) findViewById(R.id.password_editText);
         logIn = (Button) findViewById(R.id.logIn_button);
+
     }
+
 
 
     //Log user In using ID and Password

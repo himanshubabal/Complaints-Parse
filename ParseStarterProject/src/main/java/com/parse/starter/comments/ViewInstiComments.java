@@ -8,8 +8,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,13 +22,16 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.starter.R;
+import com.parse.starter.ResolveComplaint.ResolveHostelComplaint;
+import com.parse.starter.ResolveComplaint.ResolveInstiComplaint;
+import com.parse.starter.ViewComplaints.ViewInstiComp;
 
 import java.util.ArrayList;
 import java.util.List;
 
 //todo -> combine upvote and downvote
 //todo -> make vote clickable only once
-public class ViewInstiComments extends Fragment implements View.OnClickListener{
+public class ViewInstiComments extends Fragment implements View.OnClickListener, ListView.OnItemClickListener{
     TextView title, description, postedBy, postedOn, status, upVotes, downVotes;
     Button upVote_button, downVote_button, add_comment_button;
     ListView comment_listView;
@@ -36,6 +41,7 @@ public class ViewInstiComments extends Fragment implements View.OnClickListener{
     ArrayAdapter<String> comments_array_adapter;
     ParseQuery<ParseObject> query;
     ParseQuery<ParseObject> query1;
+    FrameLayout instiResolve_frameLayout;
 
     @Nullable
     @Override
@@ -59,6 +65,9 @@ public class ViewInstiComments extends Fragment implements View.OnClickListener{
         user = ParseUser.getCurrentUser();
         comments_array_list = new ArrayList<>();
         parseObjectID = getArguments().getString("parseObjectID");
+
+        instiResolve_frameLayout = (FrameLayout)v.findViewById(R.id.insti_resolve_frameLayout);
+        instiResolve_frameLayout.setOnClickListener(this);
 
         query = new ParseQuery<ParseObject>("comp_insti");
         query.whereEqualTo("objectId", parseObjectID);
@@ -149,8 +158,6 @@ public class ViewInstiComments extends Fragment implements View.OnClickListener{
                         comment_listView.setAdapter(comments_array_adapter);
                         Log.i("parse-self_comp_zzz", "test-2");
 
-//                        hostel_comp_listView.setOnItemClickListener(ViewHostelComp.this);
-
                     }
                     else {
                         Toast.makeText(getActivity(), "No comments for this complaint", Toast.LENGTH_LONG).show();
@@ -165,7 +172,7 @@ public class ViewInstiComments extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.add_comment_insti_button){
+        if (v.getId() == R.id.add_comment_insti_button) {
             Log.i("parse-hostel-comm", "1");
             addCommentInsti addCommInsti = new addCommentInsti();
             Bundle parseObjID = new Bundle();
@@ -177,39 +184,58 @@ public class ViewInstiComments extends Fragment implements View.OnClickListener{
             fragmentT.addToBackStack(null);
             fragmentT.commit();
             Log.i("parse-hostel-comm", "3");
-        }
-        else if (v.getId() == R.id.upVote_comment_insti_button) {
+        } else if (v.getId() == R.id.upVote_comment_insti_button) {
             query.findInBackground(new FindCallback<ParseObject>() {
                 @Override
                 public void done(List<ParseObject> objects, ParseException e) {
-                    if(e == null){
+                    if (e == null) {
                         ParseObject object = objects.get(0);
                         object.increment("numOfUp");
                         object.saveInBackground();
-                    }
-                    else {
+                    } else {
                         Log.i("parse-view_hostel_comm", e.toString());
                     }
                 }
             });
-        }
-        else if (v.getId() == R.id.downVote_comment_insti_button){
+        } else if (v.getId() == R.id.downVote_comment_insti_button) {
             query.findInBackground(new FindCallback<ParseObject>() {
                 @Override
                 public void done(List<ParseObject> objects, ParseException e) {
-                    if(e == null){
+                    if (e == null) {
                         ParseObject object = objects.get(0);
                         object.increment("numOfDown");
                         object.saveInBackground();
-                    }
-                    else {
+                    } else {
                         Log.i("parse-view_hostel_comm", e.toString());
                     }
                 }
             });
-        }
-        else {
+        } else if (v.getId() == R.id.insti_resolve_frameLayout) {
+            Log.i("parse-isSpecial", "8");
 
+            if (user.getInt("userType") == -1) {
+                Log.i("parse-isSpecial", "9");
+                Log.i("parse-isSpecial", String.valueOf(true));
+                ResolveInstiComplaint resolveInstiComplaint = new ResolveInstiComplaint();
+                Bundle parseObjID = new Bundle();
+                parseObjID.putString("parseObjectID", parseObjectID);
+                Log.i("parse-###", parseObjectID);
+                resolveInstiComplaint.setArguments(parseObjID);
+
+                FragmentTransaction fragmentT = getFragmentManager().beginTransaction();
+                fragmentT.replace(R.id.frame, resolveInstiComplaint);
+                fragmentT.addToBackStack(null);
+                fragmentT.commit();
+                Log.i("parse-isSpecial", "10");
+            }
+            else {
+
+            }
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
 }

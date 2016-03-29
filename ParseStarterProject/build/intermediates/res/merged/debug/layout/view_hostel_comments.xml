@@ -173,5 +173,15 @@
             android:layout_above="@+id/textView20"
             android:layout_toEndOf="@+id/textView20" />
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/upVote_comment_button"
+            android:id="@+id/hostel_resolve_frameLayout">
+
+        </FrameLayout>
+
     </RelativeLayout>
 </LinearLayout><!-- From: file:/Users/himanshu_babal/Parse-Starter-Project-IITD-Complaints/ParseStarterProject/src/main/res/layout/view_hostel_comments.xml -->

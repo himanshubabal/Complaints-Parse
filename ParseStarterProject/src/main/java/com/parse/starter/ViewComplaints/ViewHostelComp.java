@@ -48,7 +48,12 @@ public class ViewHostelComp extends Fragment implements View.OnClickListener, Li
     public void generateCompList(){
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("comp_hostel");
         String userHostel = user.get("hostel").toString();
-        query.whereEqualTo("hostel", userHostel);
+        if(user.getObjectId().equals("xiyVjxEAkD")){
+
+        }
+        else {
+            query.whereEqualTo("hostel", userHostel);
+        }
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {

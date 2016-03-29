@@ -3,6 +3,7 @@ package com.parse.starter.ViewComplaints;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,9 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.starter.Comments.ViewHostelComments;
 import com.parse.starter.R;
+import com.parse.starter.ResolveComplaint.ResolveSelfComplaint;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,7 @@ public class ViewSelfComp extends Fragment implements View.OnClickListener, Adap
     ParseUser user;
     ArrayList<String> self_comp_array;
     ArrayAdapter<String> self_comp_arrayAdapter;
+    ArrayList<ParseObject> parseObjectArrayList;
 
     @Nullable
     @Override
@@ -35,6 +39,7 @@ public class ViewSelfComp extends Fragment implements View.OnClickListener, Adap
         user = ParseUser.getCurrentUser();
         self_comp_listView = (ListView)v.findViewById(R.id.self_comp_listView);
         self_comp_array = new ArrayList<String>();
+        parseObjectArrayList = new ArrayList<>();
 
         generateCompList();
 
@@ -43,7 +48,12 @@ public class ViewSelfComp extends Fragment implements View.OnClickListener, Adap
 
     public void generateCompList(){
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("comp_indiv");
-        query.whereEqualTo("user_id", user);
+        if(user.getObjectId().equals("xiyVjxEAkD")){
+            //admin -> view all the complaints
+        }
+        else {
+            query.whereEqualTo("user_id", user);
+        }
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
@@ -67,6 +77,7 @@ public class ViewSelfComp extends Fragment implements View.OnClickListener, Adap
 
                             self_comp_array.add("Title : " + title + "\n" + "Description : " + description + "\n" +
                                                 "Status : " + status + "\n" + "Up-Votes : " + numOfUp + "\n" + "Down-Votes : " + numOfDown);
+                            parseObjectArrayList.add(object);
                         }
                         Log.i("parse-self_comp_zzz", "out of for loop");
 
@@ -75,6 +86,8 @@ public class ViewSelfComp extends Fragment implements View.OnClickListener, Adap
 
                         self_comp_listView.setAdapter(self_comp_arrayAdapter);
                         Log.i("parse-self_comp_zzz", "test-2");
+
+                        self_comp_listView.setOnItemClickListener(ViewSelfComp.this);
 
                     }
                     else {
@@ -95,6 +108,15 @@ public class ViewSelfComp extends Fragment implements View.OnClickListener, Adap
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        ResolveSelfComplaint resolveSelfComplaint = new ResolveSelfComplaint();
+        Bundle parseObjectID = new Bundle();
+        parseObjectID.putString("parseObjectID", parseObjectArrayList.get(position).getObjectId());
+        resolveSelfComplaint.setArguments(parseObjectID);
 
+//        Fragment viewHostelComments1 = new ViewHostelComments();
+        FragmentTransaction fragmentT = getFragmentManager().beginTransaction();
+        fragmentT.replace(R.id.frame, resolveSelfComplaint);
+        fragmentT.addToBackStack(null);
+        fragmentT.commit();
     }
 }

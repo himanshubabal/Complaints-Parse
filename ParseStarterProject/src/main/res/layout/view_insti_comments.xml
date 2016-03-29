@@ -173,5 +173,15 @@
             android:layout_above="@+id/textView20"
             android:layout_toEndOf="@+id/textView20" />
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/insti_resolve_frameLayout"
+            android:layout_above="@+id/upVote_comment_insti_button">
+
+        </FrameLayout>
+
     </RelativeLayout>
 </LinearLayout>

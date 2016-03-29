@@ -13,19 +13,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Username"
-        android:id="@+id/userName_EditText"/>
+        android:id="@+id/userName_EditText"
+        android:paddingTop="100dp"
+        android:layout_margin="20dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
-        android:id="@+id/password_editText"/>
+        android:id="@+id/password_editText"
+        android:inputType="textPassword"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        m/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log In"
         android:id="@+id/logIn_button"
-        android:onClick="logInMethod"/>
+        android:onClick="logInMethod"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

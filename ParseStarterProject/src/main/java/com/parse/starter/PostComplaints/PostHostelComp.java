@@ -41,6 +41,14 @@ public class PostHostelComp extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         ParseObject indiv_comp = new ParseObject("comp_hostel");
         String hostel = user.get("hostel").toString();
+
+        ParseACL acl = new ParseACL();
+        acl.setPublicReadAccess(true);
+        acl.setPublicWriteAccess(false);
+        //giving admin read and write access
+        acl.setWriteAccess("xiyVjxEAkD", true);
+        indiv_comp.setACL(acl);
+
         indiv_comp.put("user_id", user);
         indiv_comp.put("title", title_hostel_comp.getText().toString().trim());
         indiv_comp.put("description", description_hostel_comp.getText().toString().trim());

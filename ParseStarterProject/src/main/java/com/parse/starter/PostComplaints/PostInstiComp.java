@@ -40,6 +40,15 @@ public class PostInstiComp extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         ParseObject indiv_comp = new ParseObject("comp_insti");
+
+        ParseACL acl = new ParseACL();
+        acl.setPublicReadAccess(true);
+        acl.setPublicWriteAccess(false);
+        //giving admin read and write access
+        acl.setWriteAccess("xiyVjxEAkD", true);
+        indiv_comp.setACL(acl);
+
+
         indiv_comp.put("user_id", user);
         indiv_comp.put("title", title_insti_comp.getText().toString().trim());
         indiv_comp.put("description", description_insti_comp.getText().toString().trim());

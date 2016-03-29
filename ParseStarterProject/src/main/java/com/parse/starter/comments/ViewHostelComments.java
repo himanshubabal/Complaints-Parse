@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,8 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.starter.R;
+import com.parse.starter.ResolveComplaint.ResolveHostelComplaint;
+import com.parse.starter.ResolveComplaint.ResolveSelfComplaint;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +39,9 @@ public class ViewHostelComments extends Fragment implements View.OnClickListener
     ArrayAdapter<String> comments_array_adapter;
     ParseQuery<ParseObject> query;
     ParseQuery<ParseObject> query1;
+    FrameLayout hostelResolve_frameLayout;
+    ArrayList<ParseObject> specialParseUsers;
+    Boolean isSpecial;
 
     @Nullable
     @Override
@@ -58,7 +64,12 @@ public class ViewHostelComments extends Fragment implements View.OnClickListener
         comment_listView = (ListView)v.findViewById(R.id.comment_listView);
         user = ParseUser.getCurrentUser();
         comments_array_list = new ArrayList<>();
+
         parseObjectID = getArguments().getString("parseObjectID");
+        specialParseUsers = new ArrayList<>();
+
+        hostelResolve_frameLayout = (FrameLayout)v.findViewById(R.id.hostel_resolve_frameLayout);
+        hostelResolve_frameLayout.setOnClickListener(this);
 
         query = new ParseQuery<ParseObject>("comp_hostel");
         query.whereEqualTo("objectId", parseObjectID);
@@ -66,6 +77,40 @@ public class ViewHostelComments extends Fragment implements View.OnClickListener
         addTextFields();
 
         query1 = new ParseQuery<ParseObject>("comm_hostel");
+
+
+        //Special Parse Users
+        Log.i("parse-isSpecial", "1");
+        ParseQuery<ParseObject> specialUsers = new ParseQuery<ParseObject>("SuperUser");
+        isSpecial = false;
+        specialUsers.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                Log.i("parse-isSpecial", "2");
+                if(e == null){
+                    Log.i("parse-isSpecial", "3");
+                    for (ParseObject object : objects){
+                        Log.i("parse-isSpecial", "4");
+                        specialParseUsers.add(object);
+                        if(object.get("user_id").equals(user.getObjectId().toString())){
+                            isSpecial = true;
+                            Log.i("parse-isSpecial", "7");
+                        }
+                    }
+                }
+                else {
+                    Log.i("parse-isSpecial", "5"+e.toString());
+                }
+            }
+        });
+        Log.i("parse-isSpecial", "6");
+//        isSpecial = false;
+//        for (ParseObject object : specialParseUsers){
+//            Log.i("parse-isSpecial", "7");
+//            if(object.get("user_id").equals(user.getObjectId())){
+//                isSpecial = true;
+//            }
+//        }
 
 
         return v;
@@ -208,8 +253,24 @@ public class ViewHostelComments extends Fragment implements View.OnClickListener
                 }
             });
         }
-        else {
+        else if(v.getId() == R.id.hostel_resolve_frameLayout){
+            Log.i("parse-isSpecial", "8");
 
+            if (user.getInt("userType") <= -1){
+                Log.i("parse-isSpecial", "9");
+                Log.i("parse-isSpecial", String.valueOf(true));
+                ResolveHostelComplaint resolveHostelComplaint = new ResolveHostelComplaint();
+                Bundle parseObjID = new Bundle();
+                parseObjID.putString("parseObjectID", parseObjectID);
+                Log.i("parse-###", parseObjectID);
+                resolveHostelComplaint.setArguments(parseObjID);
+
+                FragmentTransaction fragmentT = getFragmentManager().beginTransaction();
+                fragmentT.replace(R.id.frame, resolveHostelComplaint);
+                fragmentT.addToBackStack(null);
+                fragmentT.commit();
+                Log.i("parse-isSpecial", "10");
+            }
         }
     }
 }

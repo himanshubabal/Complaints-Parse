@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
@@ -40,12 +41,24 @@ public class PostIndivComp extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         ParseObject indiv_comp = new ParseObject("comp_indiv");
+
+        ParseACL acl = new ParseACL();
+        acl.setPublicReadAccess(false);
+        acl.setPublicWriteAccess(false);
+        //giving admin read and write access
+        acl.setWriteAccess("xiyVjxEAkD", true);
+        acl.setReadAccess("xiyVjxEAkD", true);
+        acl.setReadAccess(ParseUser.getCurrentUser(), true);
+        acl.setWriteAccess(ParseUser.getCurrentUser(), true);
+        indiv_comp.setACL(acl);
+
         indiv_comp.put("user_id", user);
         indiv_comp.put("title", title_indiv_comp.getText().toString().trim());
         indiv_comp.put("description", description_indiv_comp.getText().toString().trim());
         indiv_comp.put("isResolved", false);
         indiv_comp.put("numOfUp", 0);
         indiv_comp.put("numOfDown", 0);
+
         indiv_comp.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
