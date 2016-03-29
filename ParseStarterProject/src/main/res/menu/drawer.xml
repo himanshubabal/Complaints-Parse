@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+    <item
+        android:id="@+id/view_profile_menu"
+        android:checked="false"
+        android:icon="@drawable/profile"
+        android:title="View your Profile" />
+
+    <item
+        android:id="@+id/new_comp_menu"
+        android:checked="false"
+        android:icon="@drawable/new_complaint"
+        android:title="Submit New Complaints" />
+
+    <item
+        android:id="@+id/your_comp_menu"
+        android:checked="false"
+        android:icon="@drawable/your_complaint"
+        android:title="Your Complaints" />
+
+    <item
+        android:id="@+id/hostel_comp_menu"
+        android:checked="false"
+        android:icon="@drawable/hostel"
+        android:title="Hostel Level Complaints" />
+
+    <item
+        android:id="@+id/insti_comp_menu"
+        android:checked="false"
+        android:icon="@drawable/insti"
+        android:title="Institute Complaints" />
+
+
+    <item
+        android:id="@+id/settings_menu"
+        android:checked="false"
+        android:icon="@drawable/settings"
+        android:title="Settings" />
+
+    <item
+        android:id="@+id/logout_menu"
+        android:checked="false"
+        android:icon="@drawable/logout"
+        android:title="Logout" />
+
+    </group>
+
+
+</menu>

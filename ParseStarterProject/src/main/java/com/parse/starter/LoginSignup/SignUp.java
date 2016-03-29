@@ -7,9 +7,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -20,11 +25,15 @@ import com.parse.starter.R;
 
 import java.util.List;
 
-public class SignUp extends AppCompatActivity{
-    EditText email_Id, entry_No, full_Name, password, hostel, user_name;
+public class SignUp extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, Spinner.OnItemSelectedListener{
+    EditText email_Id, entry_No, full_Name, password, user_name;
     RadioButton student, faculty, staff;
+    String hostel;
     Button signUpButton;
     int userType;
+    RadioGroup radioGroup;
+    Spinner hostel_dropDown;
+    ArrayAdapter<CharSequence> adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,24 +47,19 @@ public class SignUp extends AppCompatActivity{
         full_Name = (EditText) findViewById(R.id.full_name_editText);
         user_name = (EditText) findViewById(R.id.userName_editText_signup);
         password = (EditText) findViewById(R.id.password_editText_signup);
-        hostel = (EditText) findViewById(R.id.hostel_editText);
-
-        //radio button not working
+        radioGroup = (RadioGroup) findViewById(R.id.radio_group_signup);
         student = (RadioButton) findViewById(R.id.student_radioButton);
-        if(student.isChecked()){
-            userType = 0;
-        }
         faculty = (RadioButton) findViewById(R.id.faculty_radioButton);
-        if(faculty.isChecked()){
-            userType = 1;
-        }
         staff = (RadioButton) findViewById(R.id.staff_radioButton);
-        if(staff.isChecked()){
-            userType = 2;
-        }
-
         signUpButton = (Button) findViewById(R.id.signUp_button);
+        radioGroup.setOnCheckedChangeListener(this);
 
+        hostel_dropDown = (Spinner) findViewById(R.id.hostel_selection_spinner);
+        adapter = ArrayAdapter.createFromResource(this,
+                R.array.hostel_spinner_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        hostel_dropDown.setAdapter(adapter);
+        hostel_dropDown.setOnItemSelectedListener(this);
     }
 
     //by default - Users in parse have unique Email-ID and UserName.
@@ -78,7 +82,7 @@ public class SignUp extends AppCompatActivity{
             return;
         }
 
-        user.put("hostel", hostel.getText().toString());
+        user.put("hostel", hostel.toLowerCase());
         user.put("name", full_Name.getText().toString());
         user.put("userType", userType);
 
@@ -124,5 +128,78 @@ public class SignUp extends AppCompatActivity{
             }
         });
         return available[0];
+    }
+
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        if (checkedId == R.id.student_radioButton){
+            userType = 0;
+            Log.i("parse-signup", String.valueOf(userType));
+        }
+        else if (checkedId == R.id.faculty_radioButton){
+            userType = 1;
+            Log.i("parse-signup", String.valueOf(userType));
+        }
+        else if (checkedId == R.id.staff_radioButton){
+            userType = 2;
+            Log.i("parse-signup", String.valueOf(userType));
+        }
+        else {
+            //
+        }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (position) {
+            case 0:
+                hostel = "karakoram";
+                break;
+            case 1:
+                hostel = "aravali";
+                break;
+            case 2:
+                hostel = "girnar";
+                break;
+            case 3:
+                hostel = "jwalamukhi";
+                break;
+            case 4:
+                hostel = "kumaon";
+                break;
+            case 5:
+                hostel = "nilgiri";
+                break;
+            case 6:
+                hostel = "shivalik";
+                break;
+            case 7:
+                hostel = "satpura";
+                break;
+            case 8:
+                hostel = "udaigiri";
+                break;
+            case 9:
+                hostel = "vindhyachal";
+                break;
+            case 10:
+                hostel = "zanskar";
+                break;
+            case 11:
+                hostel = "kailash";
+                break;
+            case 12:
+                hostel = "Himadri";
+                break;
+            case 13:
+                hostel = "not_applicable";
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

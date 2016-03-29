@@ -33,29 +33,38 @@
         android:hint="Password"
         android:id="@+id/password_editText_signup"/>
 
-    <EditText
+
+    <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Hostel"
-        android:id="@+id/hostel_editText"/>
+        android:id="@+id/hostel_selection_spinner"
+        android:layout_gravity="center_horizontal" />
 
-    <RadioButton
-        android:layout_width="wrap_content"
+    <RadioGroup
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="Student"
-        android:id="@+id/student_radioButton" />
+        android:id="@+id/radio_group_signup">
 
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Faculty"
-        android:id="@+id/faculty_radioButton" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Faculty"
+            android:id="@+id/faculty_radioButton" />
 
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Staff"
-        android:id="@+id/staff_radioButton" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Student"
+            android:id="@+id/student_radioButton" />
+
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Staff"
+            android:id="@+id/staff_radioButton" />
+
+    </RadioGroup>
 
     <Button
         android:layout_width="wrap_content"
